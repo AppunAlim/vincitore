@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tambah / Edit Kursus - Course Bahasa</title>
+</head>
+<body>
+
+  <header>
+    <h1>COURSE BAHASA</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Beranda / Daftar Kursus</a></li>
+        <li><a href="formKursus.html">Tambah Kursus</a></li>
+        <li><a href="detailKursus.html">Detail Kursus</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h2>Form Tambah / Edit Data Kursus</h2>
+      <p>Gunakan formulir berikut untuk menambahkan kursus baru atau mengubah data kursus yang sudah ada.</p>
+
+      <form action="detailKursus.html" method="get">
+
+        <fieldset>
+          <legend>Data Kursus</legend>
+
+          <p>
+            <label for="nama-kursus">Nama Kursus</label><br />
+            <input type="text" id="nama-kursus" name="nama_kursus" placeholder="Contoh: Bahasa Inggris" required />
+          </p>
+
+          <p>
+            <label for="bahasa">Kategori Bahasa</label><br />
+            <select id="bahasa" name="bahasa" required>
+              <option value="">-- Pilih Bahasa --</option>
+              <option value="inggris">Bahasa Inggris</option>
+              <option value="arab">Bahasa Arab</option>
+              <option value="jepang">Bahasa Jepang</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="level">Level / Tingkatan</label><br />
+            <select id="level" name="level" required>
+              <option value="">-- Pilih Level --</option>
+              <option value="pemula">Pemula</option>
+              <option value="lanjutan">Lanjutan</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="deskripsi">Deskripsi Kursus</label><br />
+            <textarea id="deskripsi" name="deskripsi" rows="4" cols="40" placeholder="Tuliskan deskripsi singkat kursus"></textarea>
+          </p>
+
+          <p>
+            <label for="jadwal">Jadwal Kelas</label><br />
+            <input type="text" id="jadwal" name="jadwal" placeholder="Contoh: Senin & Rabu, 19.00" />
+          </p>
+
+          <p>
+            <label for="harga">Harga per Bulan (Rp)</label><br />
+            <input type="number" id="harga" name="harga" min="0" step="1000" placeholder="199999" required />
+          </p>
+
+          <p>
+            <label for="kuota">Kuota Peserta</label><br />
+            <input type="number" id="kuota" name="kuota" min="1" placeholder="20" />
+          </p>
+
+          <p>
+            <label for="tanggal-mulai">Tanggal Mulai Kelas</label><br />
+            <input type="date" id="tanggal-mulai" name="tanggal_mulai" />
+          </p>
+
+          <p>
+            <label for="foto-kursus">Foto Kursus</label><br />
+            <input type="file" id="foto-kursus" name="foto_kursus" accept="image/*" />
+          </p>
+
+          <p>
+            Metode Belajar:<br />
+            <input type="radio" id="metode-online" name="metode" value="online" checked />
+            <label for="metode-online">Online</label><br />
+            <input type="radio" id="metode-offline" name="metode" value="offline" />
+            <label for="metode-offline">Tatap Muka</label>
+          </p>
+
+          <p>
+            Fasilitas:<br />
+            <input type="checkbox" id="fasilitas-sertifikat" name="fasilitas" value="sertifikat" />
+            <label for="fasilitas-sertifikat">Sertifikat Kelulusan</label><br />
+            <input type="checkbox" id="fasilitas-modul" name="fasilitas" value="modul" />
+            <label for="fasilitas-modul">Modul Belajar</label><br />
+            <input type="checkbox" id="fasilitas-konsultasi" name="fasilitas" value="konsultasi" />
+            <label for="fasilitas-konsultasi">Konsultasi Pengajar</label>
+          </p>
+
+          <p>
+            <label for="status">Status Kursus</label><br />
+            <select id="status" name="status">
+              <option value="aktif">Aktif / Dibuka</option>
+              <option value="nonaktif">Tidak Aktif</option>
+            </select>
+          </p>
+        </fieldset>
+
+        <p>
+          <button type="submit">Simpan Data</button>
+          <button type="reset">Reset</button>
+        </p>
+      </form>
+    </article>
+  </main>
+
+  <footer>
+    <p>Email: vincitore@gmail.com | Telepon: +62 878-123-536</p>
+    <p>&copy; 2026 Course Bahasa</p>
+  </footer>
+
+</body>
+</html>
