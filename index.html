@@ -3,109 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daftar Kursus - Course Bahasa</title>
+  <title>Course Bahasa - Kursus Bahasa Asing Online</title>
+
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/library.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+  />
 </head>
 <body>
 
   <header>
-    <h1>COURSE BAHASA</h1>
-    <p>Platform kursus bahasa asing: Inggris, Arab, dan Jepang</p>
-
     <nav>
-      <ul>
-        <li><a href="index.html">Beranda / Daftar Kursus</a></li>
-        <li><a href="form-kursus.html">Tambah Kursus</a></li>
-        <li><a href="detail-kursus.html">Detail Kursus</a></li>
-      </ul>
+      <div class="nav-container">
+        <div class="logo">
+          <a href="index.html"><i class="fa-solid fa-graduation-cap"></i> COURSE <span>BAHASA</span></a>
+        </div>
+        <ul class="nav-menu">
+          <li class="active"><a href="index.html">Beranda</a></li>
+          <li><a href="detailKursus.html">Detail Kursus</a></li>
+          <li><a href="formKursus.html" class="nav-cta">Daftar</a></li>
+        </ul>
+      </div>
     </nav>
+
+    <div class="hero" style="background-image: url('img/teach.jpg');">
+      <div class="hero-content">
+        <h1>COURSE BAHASA</h1>
+        <p>Belajar bahasa asing dengan mudah & percaya diri bersama pengajar berpengalaman</p>
+        <a href="formKursus.html" class="hero-btn">
+          DAFTAR SEKARANG <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
   </header>
 
   <main>
-    <article>
-      <h2>Tentang Kami</h2>
-      <p>
-        Course Bahasa menyediakan kursus online untuk berbagai bahasa asing
-        dengan kurikulum yang up to date. Kami melatih peserta agar berani
-        berbicara dan percaya diri menggunakan bahasa asing sejak dini.
-      </p>
-      <img
-        src=""
-        alt="Suasana kelas kursus bahasa dengan pengajar dan beberapa peserta belajar bersama"
-        width="480"
-      />
-    </article>
+    <section class="section bg-white">
+      <div class="container about-grid">
+        <div class="about-text">
+          <h2>Tentang Kami</h2>
+          <p>
+            Course Bahasa menyediakan kursus online untuk berbagai bahasa asing
+            dengan kurikulum yang up to date. Kami melatih peserta agar berani
+            berbicara dan percaya diri menggunakan bahasa asing sejak dini
+          </p>
 
-    <section>
-      <h2>Daftar Kursus yang Tersedia</h2>
-      <p>Berikut adalah data kursus yang saat ini dibuka untuk pendaftaran.</p>
+          <h3>Keunggulan Kami</h3>
+          <ul class="keunggulan-list">
+            <li>Pengajar berpengalaman dan bersertifikat</li>
+            <li>Jadwal fleksibel: pagi, siang, dan malam</li>
+            <li>Sertifikat kelulusan resmi</li>
+            <li>Kelas online maupun tatap muka</li>
+          </ul>
+        </div>
+        <div class="about-image">
+          <img
+            src="img/belajar-bersama.jpg"
+            alt="Suasana kelas kursus bahasa dengan pengajar dan beberapa peserta belajar bersama"
+          />
+        </div>
+      </div>
+    </section>
 
-      <table border="1">
-        <caption>Data Kursus Bahasa</caption>
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama Kursus</th>
-            <th scope="col">Level</th>
-            <th scope="col">Jadwal</th>
-            <th scope="col">Harga / Bulan</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Bahasa Inggris</td>
-            <td>Pemula</td>
-            <td>Senin & Rabu, 19.00</td>
-            <td>Rp199.999</td>
-            <td>
-              <a href="detailKursus.html">Lihat Detail</a> |
-              <a href="formKursus.html">Edit</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Bahasa Inggris</td>
-            <td>Lanjutan</td>
-            <td>Selasa & Kamis, 19.00</td>
-            <td>Rp249.999</td>
-            <td>
-              <a href="detailKursus.html">Lihat Detail</a> |
-              <a href="formKursus.html">Edit</a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bahasa Arab</td>
-            <td>Pemula</td>
-            <td>Sabtu, 09.00</td>
-            <td>Rp199.999</td>
-            <td>
-              <a href="detailKursus.html">Lihat Detail</a> |
-              <a href="formKursus.html">Edit</a>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Bahasa Jepang</td>
-            <td>Pemula</td>
-            <td>Minggu, 09.00</td>
-            <td>Rp199.999</td>
-            <td>
-              <a href="detailKursus.html">Lihat Detail</a> |
-              <a href="formKursus.html">Edit</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <section class="section bg-gray">
+      <div class="container">
+        <h2 class="section-title">Daftar Kursus yang Tersedia</h2>
+        <p class="section-subtitle">Berikut adalah data kursus yang saat ini dibuka untuk pendaftaran</p>
 
-      <p><a href="formKursus.html">+ Tambah Kursus Baru</a></p>
+        <div class="table-card">
+          <div class="table-responsive">
+            <table border="1">
+              <caption>Data Kursus Bahasa</caption>
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama Kursus</th>
+                  <th scope="col">Level</th>
+                  <th scope="col">Jadwal</th>
+                  <th scope="col">Harga / Bulan</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Bahasa Inggris</td>
+                  <td><span class="badge badge-pemula">Pemula</span></td>
+                  <td>Senin & Rabu, 19.00</td>
+                  <td><span class="harga">Rp199.999</span></td>
+                  <td>
+                    <a href="detail-inggris.html">Lihat Detail</a> |
+                    <a href="formKursus.html">Daftar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Bahasa Inggris</td>
+                  <td><span class="badge badge-lanjutan">Lanjutan</span></td>
+                  <td>Selasa & Kamis, 19.00</td>
+                  <td><span class="harga">Rp249.999</span></td>
+                  <td>
+                    <a href="detail-inggris.html">Lihat Detail</a> |
+                    <a href="formKursus.html">Daftar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Bahasa Arab</td>
+                  <td><span class="badge badge-pemula">Pemula</span></td>
+                  <td>Sabtu, 09.00</td>
+                  <td><span class="harga">Rp199.999</span></td>
+                  <td>
+                    <a href="detail-arab.html">Lihat Detail</a> |
+                    <a href="formKursus.html">Daftar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Bahasa Jepang</td>
+                  <td><span class="badge badge-pemula">Pemula</span></td>
+                  <td>Minggu, 09.00</td>
+                  <td><span class="harga">Rp199.999</span></td>
+                  <td>
+                    <a href="detail-jepang.html">Lihat Detail</a> |
+                    <a href="formKursus.html">Daftar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Email: vincitore@gmail.com | Telepon: +62 878-123-536</p>
-    <p>&copy; 2026 Course Bahasa</p>
+    <div class="footer-content">
+      <p>Email: vincitore@gmail.com | Telepon: +62 878-123-536</p>
+      <p class="copyright">&copy; 2026 Course Bahasa. Seluruh hak cipta dilindungi</p>
+    </div>
   </footer>
 
 </body>

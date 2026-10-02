@@ -1,0 +1,76 @@
+/* ===================== RESET & ROOT VARIABLES ===================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --white2: #f2f2f2;
+  --black: #262626;
+  --black2: #dadada;
+  --blue: #2c3363;
+  --yellow: rgb(255, 187, 35);
+  --yellow-dark: rgb(255, 174, 0);
+  --orange: rgb(255, 111, 36);
+  --red: rgb(220, 53, 69);
+  --radius: 8px;
+  --shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===================== TYPOGRAPHY ===================== */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--white2);
+  color: var(--black);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Poppins", sans-serif;
+  color: var(--black);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--blue);
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

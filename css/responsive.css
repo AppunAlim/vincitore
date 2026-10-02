@@ -1,0 +1,103 @@
+/* ===================== TABLET & MOBILE (<= 768px) ===================== */
+@media screen and (max-width: 768px) {
+  nav .nav-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 18px 20px;
+  }
+
+  nav .nav-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero {
+    min-height: 45vh;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 45px 20px;
+  }
+
+  .about-grid {
+    flex-direction: column;
+  }
+
+  .about-text h2 {
+    text-align: center;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .form-card {
+    padding: 22px;
+  }
+
+  .teacher-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  nav .nav-menu a.nav-cta {
+    margin-left: 0;
+  }
+}
+
+/* ===================== MOBILE KECIL ===================== */
+@media screen and (max-width: 480px) {
+  .hero {
+    min-height: 40vh;
+  }
+
+  .hero h1 {
+    font-size: 1.3rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .radio-group,
+  .checkbox-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lang-switch {
+    gap: 8px;
+  }
+
+  .lang-switch a {
+    padding: 7px 16px;
+    font-size: 0.82rem;
+  }
+}
