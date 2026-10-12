@@ -284,6 +284,15 @@ button[type="reset"]:hover {
   object-fit: cover;
 }
 
+/* ===================== DETAIL ===================== */
+
+section .container p {
+  font-size: large;
+  margin-top: 3vh;
+}
+
+
+
 /* ===================== FOOTER ===================== */
 footer {
   background-color: var(--black);

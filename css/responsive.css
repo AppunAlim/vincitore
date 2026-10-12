@@ -100,4 +100,21 @@
     padding: 7px 16px;
     font-size: 0.82rem;
   }
+
+  .img-detail {
+    min-height: 20vh;
+    min-width: 40vh;
+    margin: 0 auto 20px
+    
+  }
+
+  .lang-switch {
+  max-width: 30vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding : 20px;
+}
 }
