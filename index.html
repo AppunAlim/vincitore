@@ -34,6 +34,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
   />
+  <link rel="stylesheet" href="css/sidebar.css" />
 </head>
 <body class="bg-snow font-sans leading-[1.6] text-ink">
 
@@ -97,6 +98,17 @@
         <p class="mb-[30px] text-center text-black">Berikut adalah data kursus yang saat ini dibuka untuk pendaftaran</p>
 
         <div class="rounded-lg bg-white p-[25px] shadow-card">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p id="info-jumlah" class="text-[0.95rem]" aria-live="polite"></p>
+            <div class="flex items-center gap-2.5">
+              <label for="filter-level" class="font-semibold">Filter Level:</label>
+              <select id="filter-level" class="rounded-lg border border-mist bg-white px-3 py-2 font-sans text-[0.95rem] leading-[normal] focus:border-gold focus:outline focus:outline-2 focus:outline-gold">
+                <option value="semua">Semua Level</option>
+                <option value="Pemula">Pemula</option>
+                <option value="Lanjutan">Lanjutan</option>
+              </select>
+            </div>
+          </div>
           <div class="overflow-x-auto">
             <table border="1" class="mt-[15px] w-full border-collapse border border-gray-500">
               <caption class="mb-2.5 caption-top text-left font-semibold">Data Kursus Bahasa</caption>
@@ -110,51 +122,7 @@
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
-              <tbody class="[&_td]:border [&_td]:border-b-mist [&_td]:border-gray-500 [&_td]:p-3 [&_td]:text-left [&>tr:nth-child(even)]:bg-snow [&>tr:hover]:bg-gold/15">
-                <tr>
-                  <td>1</td>
-                  <td>Bahasa Inggris</td>
-                  <td><span class="inline-block rounded-[20px] px-2.5 py-1 text-[0.8rem] font-semibold text-white bg-gold">Pemula</span></td>
-                  <td>Senin & Rabu, 19.00</td>
-                  <td><span class="font-bold text-navy">Rp199.999</span></td>
-                  <td>
-                    <a href="detail-inggris.html" class="font-semibold text-navy hover:text-gold-dark">Lihat Detail</a> |
-                    <a href="formKursus.html" class="font-semibold text-navy hover:text-gold-dark">Daftar</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Bahasa Inggris</td>
-                  <td><span class="inline-block rounded-[20px] px-2.5 py-1 text-[0.8rem] font-semibold text-white bg-linear-to-br from-ember to-danger">Lanjutan</span></td>
-                  <td>Selasa & Kamis, 19.00</td>
-                  <td><span class="font-bold text-navy">Rp249.999</span></td>
-                  <td>
-                    <a href="detail-inggris.html" class="font-semibold text-navy hover:text-gold-dark">Lihat Detail</a> |
-                    <a href="formKursus.html" class="font-semibold text-navy hover:text-gold-dark">Daftar</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Bahasa Arab</td>
-                  <td><span class="inline-block rounded-[20px] px-2.5 py-1 text-[0.8rem] font-semibold text-white bg-gold">Pemula</span></td>
-                  <td>Sabtu, 09.00</td>
-                  <td><span class="font-bold text-navy">Rp199.999</span></td>
-                  <td>
-                    <a href="detail-arab.html" class="font-semibold text-navy hover:text-gold-dark">Lihat Detail</a> |
-                    <a href="formKursus.html" class="font-semibold text-navy hover:text-gold-dark">Daftar</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Bahasa Jepang</td>
-                  <td><span class="inline-block rounded-[20px] px-2.5 py-1 text-[0.8rem] font-semibold text-white bg-gold">Pemula</span></td>
-                  <td>Minggu, 09.00</td>
-                  <td><span class="font-bold text-navy">Rp199.999</span></td>
-                  <td>
-                    <a href="detail-jepang.html" class="font-semibold text-navy hover:text-gold-dark">Lihat Detail</a> |
-                    <a href="formKursus.html" class="font-semibold text-navy hover:text-gold-dark">Daftar</a>
-                  </td>
-                </tr>
+              <tbody id="tabel-kursus-body" class="[&_td]:border [&_td]:border-b-mist [&_td]:border-gray-500 [&_td]:p-3 [&_td]:text-left [&>tr:nth-child(even)]:bg-snow [&>tr:hover]:bg-gold/15">
               </tbody>
             </table>
           </div>
@@ -169,6 +137,9 @@
       <p class="mt-2 text-[0.85rem] text-mist">&copy; 2026 Course Bahasa. Seluruh hak cipta dilindungi</p>
     </div>
   </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 </html>

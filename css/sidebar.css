@@ -1,0 +1,167 @@
+.sb-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #262626;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sb-toggle:hover {
+  background-color: #f2f2f2;
+}
+
+.sb-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(38, 38, 38, 0.55);
+}
+
+.sb-panel {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -340px;
+  z-index: 100;
+  width: min(82vw, 320px);
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  background: #ffffff;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+}
+
+body.sb-lock {
+  overflow: hidden;
+}
+
+.sb-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #dadada;
+}
+
+.sb-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #262626;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.sb-logo i,
+.sb-logo span {
+  color: #ffbb23;
+}
+
+.sb-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #262626;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sb-close:hover {
+  background-color: #f2f2f2;
+}
+
+.sb-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sb-link {
+  display: block;
+  padding: 12px 22px;
+  border-radius: 30px;
+  color: #262626;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sb-link:hover {
+  background-color: #f2f2f2;
+  color: #ffae00;
+}
+
+.sb-link.is-cta {
+  background-color: #262626;
+  color: #ffffff;
+  text-align: center;
+}
+
+.sb-link.is-cta:hover {
+  background-color: #ffbb23;
+  color: #ffffff;
+}
+
+.sb-link.is-active {
+  background-color: #ffbb23;
+  color: #ffffff;
+}
+
+.sb-link.is-active:hover {
+  background-color: #ffae00;
+  color: #ffffff;
+}
+
+.sb-toggle:focus-visible,
+.sb-close:focus-visible,
+.sb-link:focus-visible {
+  outline: 2px solid #2c3363;
+  outline-offset: 2px;
+}
+
+/* ===================== MOBILE (<= 768px) ===================== */
+@media screen and (max-width: 768px) {
+  /* baris navbar: logo di kiri, hamburger di kanan (satu baris) */
+  body header nav .sb-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5;
+    padding: 14px 20px;
+  }
+
+  body header nav .sb-menu {
+    display: none;
+  }
+
+  .sb-toggle {
+    display: inline-flex;
+  }
+}
