@@ -1,41 +1,40 @@
 
 
 // Data dummy: array of object untuk Daftar Course
-const daftarKursus = [
-  { id: 1, nama: "Bahasa Inggris", level: "Pemula",   jadwal: "Senin & Rabu, 19.00",   harga: 199999, halamanDetail: "detail-inggris.html" },
-  { id: 2, nama: "Bahasa Inggris", level: "Lanjutan", jadwal: "Selasa & Kamis, 19.00", harga: 249999, halamanDetail: "detail-inggris.html" },
-  { id: 3, nama: "Bahasa Arab",    level: "Pemula",   jadwal: "Sabtu, 09.00",          harga: 199999, halamanDetail: "detail-arab.html" },
-  { id: 4, nama: "Bahasa Jepang",  level: "Pemula",   jadwal: "Minggu, 09.00",         harga: 199999, halamanDetail: "detail-jepang.html" }
-];
+// URL Backend NestJS
+const KURSUS_API = "http://localhost:3000/kursus";
+
+// Data kursus dari backend
+let daftarKursus = [];
 
 const KELAS_BADGE = "inline-block rounded-[20px] px-2.5 py-1 text-[0.8rem] font-semibold text-white";
 const KELAS_LINK = "font-semibold text-navy hover:text-gold-dark";
 
-// Function format rupiah
+// Format Rupiah
 function formatRupiah(angka) {
   return "Rp" + String(angka).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-// Function Filter Level
+// Filter berdasarkan level
 function filterByLevel(data, level) {
   if (level === "semua") {
     return data;
   }
+
   return data.filter(function (kursus) {
     return kursus.level === level;
   });
 }
 
-// Function membuat baris tabel dari array menggunakan perulangan
-function tampilkanKursus(level) {
+// Menampilkan kursus
+function tampilkanKursus(level = "semua") {
   const tbody = document.getElementById("tabel-kursus-body");
   const info = document.getElementById("info-jumlah");
 
-  if (!tbody) {
-    return;
-  }
+  if (!tbody) return;
 
   const hasil = filterByLevel(daftarKursus, level);
+
   let baris = "";
 
   if (hasil.length === 0) {
@@ -45,6 +44,7 @@ function tampilkanKursus(level) {
       const kursus = hasil[i];
 
       let kelasBadge = KELAS_BADGE + " bg-gold";
+
       if (kursus.level === "Lanjutan") {
         kelasBadge = KELAS_BADGE + " bg-linear-to-br from-ember to-danger";
       }
@@ -58,7 +58,9 @@ function tampilkanKursus(level) {
         '<td><span class="font-bold text-navy">' + formatRupiah(kursus.harga) + "</span></td>" +
         "<td>" +
           '<a href="' + kursus.halamanDetail + '" class="' + KELAS_LINK + '">Lihat Detail</a> | ' +
-          '<a href="formKursus.html" class="' + KELAS_LINK + '">Daftar</a>' +
+          '<a href="formKursus.html" class="' + KELAS_LINK + '">Daftar</a> | ' +
+          '<button type="button" data-action="edit" data-id="' + kursus.id + '" class="font-semibold text-navy">Edit</button> | ' +
+          '<button type="button" data-action="delete" data-id="' + kursus.id + '" class="font-semibold text-danger">Hapus</button>' +
         "</td>" +
         "</tr>";
     }
@@ -67,11 +69,174 @@ function tampilkanKursus(level) {
   tbody.innerHTML = baris;
 
   if (info) {
-    info.textContent = "Menampilkan " + hasil.length + " dari " + daftarKursus.length + " kursus";
+    info.textContent =
+      "Menampilkan " + hasil.length + " dari " + daftarKursus.length + " kursus";
   }
 }
 
-tampilkanKursus("semua");
+// Mengambil data kursus dari backend
+async function ambilKursus() {
+  try {
+    const response = await fetch(KURSUS_API);
+
+    if (!response.ok) {
+      throw new Error("Gagal mengambil data kursus");
+    }
+
+    daftarKursus = await response.json();
+
+    const filter = document.getElementById("filter-level");
+
+    tampilkanKursus(filter ? filter.value : "semua");
+
+  } catch (error) {
+    console.error("Error kursus:", error);
+
+    const tbody = document.getElementById("tabel-kursus-body");
+
+    if (tbody) {
+      tbody.innerHTML =
+        '<tr><td colspan="6">Gagal mengambil data kursus dari server</td></tr>';
+    }
+  }
+}
+
+// Menambahkan dan mengubah kursus
+const formKursus = document.getElementById("form-kelola-kursus");
+
+if (formKursus) {
+  formKursus.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const id = document.getElementById("kursus-id").value;
+
+    const data = {
+      nama: document.getElementById("kursus-nama").value.trim(),
+      level: document.getElementById("kursus-level").value,
+      jadwal: document.getElementById("kursus-jadwal").value.trim(),
+      harga: Number(document.getElementById("kursus-harga").value),
+      halamanDetail: document.getElementById("kursus-detail").value,
+    };
+
+    try {
+      const response = await fetch(
+        id ? KURSUS_API + "/" + id : KURSUS_API,
+        {
+          method: id ? "PATCH" : "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const hasil = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          Array.isArray(hasil.message)
+            ? hasil.message.join(", ")
+            : hasil.message || "Gagal menyimpan kursus"
+        );
+      }
+
+      alert(id ? "Kursus berhasil diubah!" : "Kursus berhasil ditambahkan!");
+
+      formKursus.reset();
+      document.getElementById("kursus-id").value = "";
+
+      document.getElementById("btn-simpan-kursus").textContent =
+        "Tambah Kursus";
+
+      document.getElementById("btn-batal-edit").classList.add("hidden");
+
+      await ambilKursus();
+
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+}
+
+// Memilih Edit atau Hapus
+const tabelKursus = document.getElementById("tabel-kursus-body");
+
+if (tabelKursus) {
+  tabelKursus.addEventListener("click", async function (e) {
+    const tombol = e.target.closest("button[data-action]");
+
+    if (!tombol) return;
+
+    const id = tombol.dataset.id;
+    const aksi = tombol.dataset.action;
+
+    if (aksi === "edit") {
+      const kursus = daftarKursus.find(
+        (item) => item.id === id
+      );
+
+      if (!kursus) return;
+
+      document.getElementById("kursus-id").value = kursus.id;
+      document.getElementById("kursus-nama").value = kursus.nama;
+      document.getElementById("kursus-level").value = kursus.level;
+      document.getElementById("kursus-jadwal").value = kursus.jadwal;
+      document.getElementById("kursus-harga").value = kursus.harga;
+      document.getElementById("kursus-detail").value = kursus.halamanDetail;
+
+      document.getElementById("btn-simpan-kursus").textContent =
+        "Simpan Perubahan";
+
+      document.getElementById("btn-batal-edit").classList.remove("hidden");
+
+      document.getElementById("form-kelola-kursus").scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+
+    if (aksi === "delete") {
+      const yakin = confirm("Apakah kamu yakin ingin menghapus kursus ini?");
+
+      if (!yakin) return;
+
+      try {
+        const response = await fetch(KURSUS_API + "/" + id, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          throw new Error("Gagal menghapus kursus");
+        }
+
+        alert("Kursus berhasil dihapus!");
+
+        await ambilKursus();
+
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  });
+}
+
+// Membatalkan mode edit
+const tombolBatalEdit = document.getElementById("btn-batal-edit");
+
+if (tombolBatalEdit) {
+  tombolBatalEdit.addEventListener("click", function () {
+    formKursus.reset();
+
+    document.getElementById("kursus-id").value = "";
+
+    document.getElementById("btn-simpan-kursus").textContent =
+      "Tambah Kursus";
+
+    tombolBatalEdit.classList.add("hidden");
+  });
+}
+
+// Mengambil data saat halaman dibuka
+ambilKursus();
 
 
 //    BAGIAN 2 - JQUERY
