@@ -170,6 +170,101 @@
           </p>
 
           <div class="rounded-lg bg-white p-[25px] shadow-card">
+            <!-- Form Pengelolaan Kursus -->
+            <div class="mb-6 rounded-lg border border-mist p-5">
+              <h3 class="mb-4 text-lg font-bold text-ink">
+                Kelola Data Kursus
+              </h3>
+
+              <form id="form-kelola-kursus">
+                <input type="hidden" id="kursus-id" />
+
+                <div class="mb-3">
+                  <label for="kursus-nama" class="mb-1 block font-semibold">
+                    Nama Kursus
+                  </label>
+                  <input
+                    type="text"
+                    id="kursus-nama"
+                    required
+                    minlength="3"
+                    class="w-full rounded-lg border border-mist px-3 py-2"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="kursus-level" class="mb-1 block font-semibold">
+                    Level
+                  </label>
+                  <select
+                    id="kursus-level"
+                    required
+                    class="w-full rounded-lg border border-mist px-3 py-2"
+                  >
+                    <option value="Pemula">Pemula</option>
+                    <option value="Lanjutan">Lanjutan</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="kursus-jadwal" class="mb-1 block font-semibold">
+                    Jadwal
+                  </label>
+                  <input
+                    type="text"
+                    id="kursus-jadwal"
+                    required
+                    minlength="5"
+                    class="w-full rounded-lg border border-mist px-3 py-2"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="kursus-harga" class="mb-1 block font-semibold">
+                    Harga per Bulan
+                  </label>
+                  <input
+                    type="number"
+                    id="kursus-harga"
+                    required
+                    min="1"
+                    step="1"
+                    class="w-full rounded-lg border border-mist px-3 py-2"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label for="kursus-detail" class="mb-1 block font-semibold">
+                    Halaman Detail
+                  </label>
+                  <select
+                    id="kursus-detail"
+                    required
+                    class="w-full rounded-lg border border-mist px-3 py-2"
+                  >
+                    <option value="detail-inggris.html">Bahasa Inggris</option>
+                    <option value="detail-arab.html">Bahasa Arab</option>
+                    <option value="detail-jepang.html">Bahasa Jepang</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  id="btn-simpan-kursus"
+                  class="rounded-full bg-ink px-6 py-2.5 font-semibold text-white hover:bg-gold"
+                >
+                  Tambah Kursus
+                </button>
+
+                <button
+                  type="button"
+                  id="btn-batal-edit"
+                  class="hidden rounded-full bg-snow px-6 py-2.5 font-semibold text-ink"
+                >
+                  Batal Edit
+                </button>
+              </form>
+            </div>
             <div
               class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
             >
