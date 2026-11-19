@@ -16,19 +16,26 @@ import { UpdateKursusDto } from './dto/update-kursus.dto.js';
 export class KursusController {
   constructor(
     private readonly kursusService: KursusService,
-  ) {}
+  ) { }
 
   // GET /kursus
   @Get()
   findAll() {
     return this.kursusService.findAll();
   }
-
+  
+  // Filter by Statistik
+  @Get('level')
+  getLevel() {
+    return this.kursusService.getLevel();
+  }
+  
   // GET /kursus/:id
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.kursusService.findOne(id);
   }
+
 
   // POST /kursus
   @Post()
@@ -50,4 +57,6 @@ export class KursusController {
   remove(@Param('id') id: string) {
     return this.kursusService.remove(id);
   }
+
+  
 }

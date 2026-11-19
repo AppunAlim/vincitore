@@ -1,60 +1,27 @@
+import { PrismaService } from '../../prisma/prisma.service.js';
+import { CreateKursusDto } from './dto/create-kursus.dto.js';
+import { UpdateKursusDto } from './dto/update-kursus.dto.js';
+
 import {
   Injectable,
   NotFoundException,
   ConflictException,
 } from '@nestjs/common';
 
-import { Kursus } from './entities/kursus.entity.js';
-import { CreateKursusDto } from './dto/create-kursus.dto.js';
-import { UpdateKursusDto } from './dto/update-kursus.dto.js';
-
 @Injectable()
 export class KursusService {
-  private daftarKursus: Kursus[] = [
-    {
-      id: '1',
-      nama: 'Bahasa Inggris',
-      level: 'Pemula',
-      jadwal: 'Senin & Rabu, 19.00',
-      harga: 199999,
-      halamanDetail: 'detail-inggris.html',
-    },
-    {
-      id: '2',
-      nama: 'Bahasa Inggris',
-      level: 'Lanjutan',
-      jadwal: 'Selasa & Kamis, 19.00',
-      harga: 249999,
-      halamanDetail: 'detail-inggris.html',
-    },
-    {
-      id: '3',
-      nama: 'Bahasa Arab',
-      level: 'Pemula',
-      jadwal: 'Sabtu, 09.00',
-      harga: 199999,
-      halamanDetail: 'detail-arab.html',
-    },
-    {
-      id: '4',
-      nama: 'Bahasa Jepang',
-      level: 'Pemula',
-      jadwal: 'Minggu, 09.00',
-      harga: 199999,
-      halamanDetail: 'detail-jepang.html',
-    },
-  ];
+  constructor(private prisma: PrismaService) {}
 
-  // READ: Mengambil seluruh kursus
-  findAll(): Kursus[] {
-    return this.daftarKursus;
+  // READ Mengambil seluruh kursus
+  async findAll() {
+    return this.prisma.kursus.findMany();
   }
 
-  // READ: Mengambil satu kursus
-  findOne(id: string): Kursus {
-    const kursus = this.daftarKursus.find(
-      (item) => item.id === id,
-    );
+  // READ Mengambil satu kursus
+  async findOne(id: string) {
+    const kursus = await this.prisma.kursus.findUnique({
+      where: { id },
+    });
 
     if (!kursus) {
       throw new NotFoundException(
@@ -65,14 +32,15 @@ export class KursusService {
     return kursus;
   }
 
-  // CREATE: Menambahkan kursus
-  create(createKursusDto: CreateKursusDto): Kursus {
-    const duplikat = this.daftarKursus.some(
-      (item) =>
-        item.nama === createKursusDto.nama &&
-        item.level === createKursusDto.level &&
-        item.jadwal === createKursusDto.jadwal,
-    );
+  // CREATE Menambahkan kursus
+  async create(createKursusDto: CreateKursusDto) {
+    const duplikat = await this.prisma.kursus.findFirst({
+      where: {
+        nama: createKursusDto.nama,
+        level: createKursusDto.level,
+        jadwal: createKursusDto.jadwal,
+      },
+    });
 
     if (duplikat) {
       throw new ConflictException(
@@ -80,36 +48,26 @@ export class KursusService {
       );
     }
 
-    const idBerikutnya =
-      Math.max(
-        0,
-        ...this.daftarKursus.map((item) => Number(item.id)),
-      ) + 1;
-
-    const kursusBaru: Kursus = {
-      id: String(idBerikutnya),
-      ...createKursusDto,
-    };
-
-    this.daftarKursus.push(kursusBaru);
-
-    return kursusBaru;
+    return this.prisma.kursus.create({
+      data: createKursusDto,
+    });
   }
 
-  // UPDATE: Mengubah kursus
-  update(
+  // UPDATE Mengubah kursus
+  async update(
     id: string,
     updateKursusDto: UpdateKursusDto,
-  ): Kursus {
-    const kursus = this.findOne(id);
+  ) {
+    const kursus = await this.findOne(id);
 
-    const duplikat = this.daftarKursus.some(
-      (item) =>
-        item.id !== id &&
-        item.nama === (updateKursusDto.nama ?? kursus.nama) &&
-        item.level === (updateKursusDto.level ?? kursus.level) &&
-        item.jadwal === (updateKursusDto.jadwal ?? kursus.jadwal),
-    );
+    const duplikat = await this.prisma.kursus.findFirst({
+      where: {
+        id: { not: id },
+        nama: updateKursusDto.nama ?? kursus.nama,
+        level: updateKursusDto.level ?? kursus.level,
+        jadwal: updateKursusDto.jadwal ?? kursus.jadwal,
+      },
+    });
 
     if (duplikat) {
       throw new ConflictException(
@@ -117,19 +75,40 @@ export class KursusService {
       );
     }
 
-    Object.assign(kursus, updateKursusDto);
-
-    return kursus;
+    return this.prisma.kursus.update({
+      where: { id },
+      data: updateKursusDto,
+    });
   }
 
-  // DELETE: Menghapus kursus
-  remove(id: string): Kursus {
-    const kursus = this.findOne(id);
+  // DELETE Menghapus kursus
+  async remove(id: string) {
+    await this.findOne(id);
 
-    this.daftarKursus = this.daftarKursus.filter(
-      (item) => item.id !== id,
-    );
-
-    return kursus;
+    return this.prisma.kursus.delete({
+      where: { id },
+    });
   }
+
+  async getLevel() {
+  const totalKursus = await this.prisma.kursus.count();
+
+  const kursusPemula = await this.prisma.kursus.count({
+    where: {
+      level: 'Pemula',
+    },
+  });
+
+  const kursusLanjutan = await this.prisma.kursus.count({
+    where: {
+      level: 'Lanjutan',
+    },
+  });
+
+  return {
+    totalKursus,
+    kursusPemula,
+    kursusLanjutan,
+  };
+}
 }
